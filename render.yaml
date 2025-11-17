@@ -1,0 +1,28 @@
+services:
+  # Streamlit Admin Dashboard
+  - type: web
+    name: omni-ai-admin-dashboard
+    env: python
+    plan: free
+    buildCommand: pip install -r admin-dashboard/requirements.txt
+    startCommand: cd admin-dashboard && streamlit run app.py --server.port=$PORT --server.address=0.0.0.0
+    envVars:
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_KEY
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+    healthCheckPath: /
+
+  # Website (TypeScript) - Uncomment when ready
+  # - type: web
+  #   name: omni-ai-website
+  #   env: node
+  #   plan: free
+  #   buildCommand: cd website && npm install && npm run build
+  #   startCommand: cd website && npm start
+  #   envVars:
+  #     - key: NODE_ENV
+  #       value: production
+

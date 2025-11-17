@@ -65,6 +65,19 @@ Each project has its own configuration requirements. See individual README files
 - [`admin-dashboard/README.md`](admin-dashboard/README.md)
 - [`website/README.md`](website/README.md) (coming soon)
 
+## 🚀 Deployment
+
+Deploy to Render (free tier available):
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
+
+**Quick Deploy:**
+1. Push your code to GitHub
+2. Go to [Render Dashboard](https://dashboard.render.com)
+3. Create a new Blueprint and connect your repository
+4. Render will auto-detect `render.yaml` and deploy your services
+5. Add environment variables in the Render dashboard
+
 ## 🤝 Contributing
 
 This repository is organized as a monorepo to facilitate:
