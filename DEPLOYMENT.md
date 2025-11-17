@@ -1,4 +1,164 @@
-# Deployment Guide - Render
+# Deployment Guide
+
+This guide covers deploying the OMNI AI monorepo to **Render** and **Railway**.
+
+---
+
+# 🚂 Railway Deployment
+
+## 🚀 Streamlit Admin Dashboard
+
+### Quick Deploy (Recommended)
+
+1. **Go to Railway Dashboard**: https://railway.app
+   - Sign up/login with GitHub
+
+2. **Create New Project**:
+   - Click "New Project"
+   - Select "Deploy from GitHub repo"
+   - Choose your `OMNI-AI` repository
+
+3. **Configure Service**:
+   - Railway will auto-detect Python
+   - If needed, set:
+     - **Root Directory**: `admin-dashboard`
+     - **Start Command**: `cd admin-dashboard && streamlit run app.py --server.port=$PORT --server.address=0.0.0.0`
+
+4. **Set Environment Variables**:
+   - Click on your service → "Variables" tab
+   - Add the following:
+     ```
+     SUPABASE_URL=your_supabase_url
+     SUPABASE_SERVICE_KEY=your_service_role_key
+     ADMIN_PASSWORD=your_admin_password
+     ```
+
+5. **Deploy**:
+   - Railway will automatically deploy
+   - Your app will be live at: `https://your-app-name.up.railway.app`
+
+### Using Railway CLI (Alternative)
+
+1. **Install Railway CLI**:
+   ```bash
+   npm i -g @railway/cli
+   ```
+
+2. **Login**:
+   ```bash
+   railway login
+   ```
+
+3. **Initialize Project**:
+   ```bash
+   railway init
+   ```
+
+4. **Link to Existing Project**:
+   ```bash
+   railway link
+   ```
+
+5. **Set Environment Variables**:
+   ```bash
+   railway variables set SUPABASE_URL=your_supabase_url
+   railway variables set SUPABASE_SERVICE_KEY=your_service_role_key
+   railway variables set ADMIN_PASSWORD=your_admin_password
+   ```
+
+6. **Deploy**:
+   ```bash
+   railway up
+   ```
+
+### Access Your App
+
+After deployment:
+- **URL**: `https://your-project-name.up.railway.app`
+- **Custom Domain**: Add in Railway dashboard → Settings → Domains
+- **Always On**: Railway free tier keeps services running (no spin-down)
+
+## 🌐 Website (TypeScript) - When Ready
+
+1. **Add New Service**:
+   - In your Railway project, click "+ New"
+   - Select "GitHub Repo"
+   - Choose the same `OMNI-AI` repository
+
+2. **Configure**:
+   - **Root Directory**: `website`
+   - Railway will auto-detect Node.js
+   - Set build/start commands if needed
+
+3. **Deploy**:
+   - Railway will automatically build and deploy
+
+## 🔧 Configuration Files
+
+### railway.toml / railway.json
+Railway configuration files in the root directory:
+- `railway.toml`: TOML format (preferred)
+- `railway.json`: JSON format (alternative)
+
+Both define build and deploy commands for your services.
+
+## 📝 Environment Variables
+
+### Required for Admin Dashboard:
+- `SUPABASE_URL`: Your Supabase project URL
+- `SUPABASE_SERVICE_KEY`: Your Supabase service role key
+- `ADMIN_PASSWORD`: Password for admin login
+
+### Setting Variables:
+- **Dashboard**: Service → Variables tab
+- **CLI**: `railway variables set KEY=value`
+- **Bulk**: Upload `.env` file in dashboard
+
+## 💰 Free Tier
+
+Railway offers:
+- **$5 credit/month** (usually enough for small apps)
+- **Always-on services** (no spin-down)
+- **Custom domains** (free)
+- **Automatic HTTPS**
+- **Auto-deploy from GitHub**
+
+## 🔄 Auto-Deploy
+
+Railway automatically deploys when you:
+- Push to the connected branch
+- Merge pull requests
+
+To configure:
+- Go to Project Settings → Source
+- Select branch and auto-deploy options
+
+## 🐛 Troubleshooting
+
+### Build Fails:
+- Check build logs in Railway dashboard
+- Verify `requirements.txt` is correct
+- Ensure Python version is compatible (3.11+)
+
+### App Won't Start:
+- Verify start command includes `--server.port=$PORT`
+- Check environment variables are set
+- Review service logs in Railway dashboard
+
+### Port Issues:
+- Railway sets `$PORT` automatically
+- Always use `$PORT` in your start command
+- Don't hardcode port numbers
+
+## 🔗 Useful Links
+
+- [Railway Dashboard](https://railway.app)
+- [Railway Documentation](https://docs.railway.app)
+- [Railway CLI](https://docs.railway.app/develop/cli)
+
+---
+
+# 🎨 Render Deployment
 
 This guide covers deploying the OMNI AI monorepo to Render.
 
@@ -162,4 +322,23 @@ To disable auto-deploy:
 For Render-specific issues, check:
 - Render Status: https://status.render.com
 - Render Community: https://community.render.com
+
+---
+
+# 📊 Platform Comparison
+
+| Feature | Railway | Render |
+|---------|---------|--------|
+| **Free Tier** | $5/month credit | 750 hours/month |
+| **Spin Down** | ❌ Always on | ✅ After 15 min inactivity |
+| **Custom Domains** | ✅ Free | ⚠️ Paid ($7/month) |
+| **Auto-Deploy** | ✅ Yes | ✅ Yes |
+| **CLI Tool** | ✅ Yes | ❌ No |
+| **Ease of Use** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
+| **Best For** | Production apps | Development/testing |
+
+## 🎯 Recommendation
+
+- **Railway**: Better for production (always-on, custom domains, more reliable)
+- **Render**: Good for development/testing (generous free tier, easy setup)
 

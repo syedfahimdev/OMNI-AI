@@ -67,16 +67,22 @@ Each project has its own configuration requirements. See individual README files
 
 ## 🚀 Deployment
 
-Deploy to Render (free tier available):
+Deploy to **Railway** or **Render** (both offer free tiers):
 
 See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
 
-**Quick Deploy:**
-1. Push your code to GitHub
-2. Go to [Render Dashboard](https://dashboard.render.com)
-3. Create a new Blueprint and connect your repository
-4. Render will auto-detect `render.yaml` and deploy your services
-5. Add environment variables in the Render dashboard
+### Railway (Recommended)
+- **Free**: $5/month credit
+- **Always-on**: No spin-down
+- **Custom domains**: Free
+- **Quick Deploy**: Connect GitHub repo → Auto-deploy
+
+### Render
+- **Free**: 750 hours/month
+- **Spins down**: After 15 min inactivity
+- **Quick Deploy**: Use Blueprint with `render.yaml`
+
+Both platforms support automatic deployments from GitHub!
 
 ## 🤝 Contributing
 

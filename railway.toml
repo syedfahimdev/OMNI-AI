@@ -1,0 +1,15 @@
+# Railway configuration for OMNI AI monorepo
+
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "cd admin-dashboard && streamlit run app.py --server.port=$PORT --server.address=0.0.0.0"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+
+# Environment variables (set these in Railway dashboard)
+# SUPABASE_URL=your_supabase_url
+# SUPABASE_SERVICE_KEY=your_service_role_key
+# ADMIN_PASSWORD=your_admin_password
+
