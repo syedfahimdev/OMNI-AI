@@ -22,8 +22,9 @@ WORKDIR /app/admin-dashboard
 EXPOSE 8501
 
 # Health check (simple port check)
+# Note: Health check will use default port 8501, Render handles port mapping
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD python -c "import socket; s = socket.socket(); s.connect(('localhost', int('$PORT'))); s.close()" || exit 1
+    CMD python -c "import socket; s = socket.socket(); s.connect(('localhost', 8501)); s.close()" || exit 1
 
 # Run Streamlit
 CMD streamlit run app.py --server.port=$PORT --server.address=0.0.0.0 --server.headless=true
