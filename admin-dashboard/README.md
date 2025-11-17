@@ -25,13 +25,17 @@ pip install -r requirements.txt
 
    **A. Local development (`.env` file, loaded via `python-dotenv`):**
 
-   Create a `.env` file in the `admin-dashboard/` directory:
+   Create a `.env` file in either location (root folder takes precedence):
+   - **Monorepo root** (`/omni-ai/.env`) - Recommended for shared config
+   - **Admin dashboard directory** (`/omni-ai/admin-dashboard/.env`) - Project-specific config
 
    ```bash
    SUPABASE_URL=your_supabase_url
    SUPABASE_SERVICE_KEY=your_service_role_key
    ADMIN_PASSWORD=your_admin_password
    ```
+
+   The app will check both locations, with root folder values taking precedence.
 
    **B. Production / hosted deployments:**
 

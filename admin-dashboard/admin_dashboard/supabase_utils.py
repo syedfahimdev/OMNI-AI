@@ -2,16 +2,23 @@
 
 import os
 from datetime import datetime
+from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional
 
 from dotenv import load_dotenv
 import streamlit as st
 from supabase import Client, create_client
 
-# Load environment variables from a .env file in the project root (if present).
+# Load environment variables from a .env file (if present).
+# Checks both the admin-dashboard directory and the monorepo root directory.
 # In production you should prefer real environment variables or Streamlit secrets;
 # this is mainly for local development.
-load_dotenv()
+_current_dir = Path(__file__).parent.parent  # admin-dashboard directory
+_root_dir = _current_dir.parent  # monorepo root directory
+
+# Try loading from root first, then fall back to admin-dashboard directory
+load_dotenv(dotenv_path=_root_dir / ".env", override=False)
+load_dotenv(dotenv_path=_current_dir / ".env", override=False)
 
 
 def _get_config_value(name: str) -> Optional[str]:
