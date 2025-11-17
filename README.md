@@ -74,7 +74,17 @@ This repository is organized as a monorepo to facilitate:
 
 ## 📄 License
 
-[Add your license here]
+**Copyright (c) 2025 Syed Fahim - All Rights Reserved**
+
+This software and associated documentation files are the proprietary and confidential property of Syed Fahim.
+
+**⚠️ NOTICE: DO NOT COPY, MODIFY, DISTRIBUTE, OR USE THIS CODE WITHOUT EXPRESS WRITTEN PERMISSION FROM THE COPYRIGHT OWNER.**
+
+Unauthorized copying, modification, distribution, or use of this Software, via any medium, is strictly prohibited and may result in legal action.
+
+For licensing inquiries, please contact: syedfahimdev@gmail.com
+
+See [LICENSE](LICENSE) for full terms.
 
 ## 🔗 Links
 
