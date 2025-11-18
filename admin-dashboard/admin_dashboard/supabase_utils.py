@@ -1,6 +1,7 @@
 """Supabase client initialization and shared utilities for the admin dashboard."""
 
 import os
+import warnings
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional
@@ -8,6 +9,11 @@ from typing import Any, Callable, Dict, List, Optional
 from dotenv import load_dotenv
 import streamlit as st
 from supabase import Client, create_client
+
+# Suppress Streamlit ScriptRunContext warnings during import
+# These warnings are harmless and occur when Streamlit code is imported
+# before the execution context is available
+warnings.filterwarnings("ignore", message=".*missing ScriptRunContext.*")
 
 # Load environment variables from a .env file (if present).
 # Checks both the admin-dashboard directory and the monorepo root directory.
@@ -34,8 +40,11 @@ def _get_config_value(name: str) -> Optional[str]:
         if hasattr(st, "secrets") and name in st.secrets:
             value = st.secrets[name]
             return str(value) if value is not None else None
+    except (RuntimeError, AttributeError):
+        # If not in Streamlit context or secrets are misconfigured, fall back to environment.
+        pass
     except Exception:
-        # If secrets are misconfigured, fall back to environment.
+        # Other exceptions, fall back to environment
         pass
 
     # 2) Plain environment variables (including those loaded from .env)
