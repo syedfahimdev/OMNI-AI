@@ -21,7 +21,7 @@ services:
     env: node
     plan: free
     buildCommand: cd website && npm install && npm run build
-    startCommand: cd website && npx next start
+    startCommand: cd website && node_modules/.bin/next start -p $PORT
     envVars:
       - key: NODE_ENV
         value: production
