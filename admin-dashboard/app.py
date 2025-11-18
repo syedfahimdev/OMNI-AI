@@ -5,6 +5,14 @@ Streamlit entrypoint that wires authentication, Supabase client initialization,
 and navigation to page modules in the ``admin_dashboard`` package.
 """
 
+import warnings
+
+# Suppress Streamlit warnings that occur during import/bare mode
+# These warnings are harmless and don't affect functionality
+warnings.filterwarnings("ignore", message=".*missing ScriptRunContext.*")
+warnings.filterwarnings("ignore", message=".*No runtime found.*")
+warnings.filterwarnings("ignore", message=".*Session state does not function.*")
+
 import streamlit as st
 
 from admin_dashboard.auth import require_login

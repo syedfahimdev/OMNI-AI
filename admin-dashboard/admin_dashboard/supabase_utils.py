@@ -10,10 +10,12 @@ from dotenv import load_dotenv
 import streamlit as st
 from supabase import Client, create_client
 
-# Suppress Streamlit ScriptRunContext warnings during import
+# Suppress Streamlit warnings during import
 # These warnings are harmless and occur when Streamlit code is imported
 # before the execution context is available
 warnings.filterwarnings("ignore", message=".*missing ScriptRunContext.*")
+warnings.filterwarnings("ignore", message=".*No runtime found.*")
+warnings.filterwarnings("ignore", message=".*Session state does not function.*")
 
 # Load environment variables from a .env file (if present).
 # Checks both the admin-dashboard directory and the monorepo root directory.

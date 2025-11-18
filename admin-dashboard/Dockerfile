@@ -19,5 +19,7 @@ COPY . .
 # Expose port
 EXPOSE 8501
 
-# Run Streamlit
+# Run Streamlit with warning suppression
+# Set PYTHONWARNINGS to suppress harmless Streamlit warnings
+ENV PYTHONWARNINGS="ignore::UserWarning:streamlit.runtime"
 CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0", "--server.headless=true"]
