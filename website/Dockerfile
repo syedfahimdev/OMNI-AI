@@ -18,6 +18,8 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Build Next.js with standalone output for Docker
+# Create public directory if it doesn't exist (required for standalone builds)
+RUN mkdir -p public
 RUN NEXT_OUTPUT=standalone npm run build
 
 # Production image, copy all the files and run next
@@ -30,9 +32,10 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 # Copy necessary files
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
+# Copy public directory (will be empty if it doesn't exist, but that's fine)
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
 
