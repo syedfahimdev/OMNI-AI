@@ -10,6 +10,7 @@ import { CalendlyPopup } from '@/components/CalendlyPopup';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://omniaiagency.com'),
   title: 'Omni AI Agency - Business Automation & AI Solutions',
   description: 'Transform your business with intelligent automation. We design AI-powered workflows and messaging systems that reduce manual work and help you scale efficiently.',
   keywords: 'business automation, AI solutions, workflow automation, messaging automation, process optimization',

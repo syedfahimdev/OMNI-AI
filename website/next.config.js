@@ -12,7 +12,9 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false, // Remove X-Powered-By header
   compress: true,
-  output: 'standalone', // Enable standalone output for Docker
+  // Enable standalone output only for Docker builds
+  // Railway/Render use NIXPACKS and don't need standalone
+  ...(process.env.NEXT_OUTPUT === 'standalone' ? { output: 'standalone' } : {}),
   env: {
     PORT: '3000'
   },

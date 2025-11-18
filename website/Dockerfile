@@ -17,8 +17,8 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Build Next.js
-RUN npm run build
+# Build Next.js with standalone output for Docker
+RUN NEXT_OUTPUT=standalone npm run build
 
 # Production image, copy all the files and run next
 FROM base AS runner
