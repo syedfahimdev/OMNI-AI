@@ -1,0 +1,4 @@
+# Ignore Docker files for Railway deployment (use NIXPACKS instead)
+Dockerfile.manual
+.dockerignore.manual
+
