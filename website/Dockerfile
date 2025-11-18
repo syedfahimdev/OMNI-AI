@@ -7,7 +7,8 @@ WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
-RUN npm ci
+# Use npm ci for faster, reliable builds. Falls back to npm install if lock file is missing
+RUN npm ci || npm install
 
 # Rebuild the source code only when needed
 FROM base AS builder
