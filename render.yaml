@@ -4,7 +4,7 @@ services:
     name: omni-ai-admin-dashboard
     env: python
     plan: free
-    buildCommand: pip install -r admin-dashboard/requirements.txt
+    buildCommand: cd admin-dashboard && pip install -r requirements.txt
     startCommand: cd admin-dashboard && streamlit run app.py --server.port=$PORT --server.address=0.0.0.0
     envVars:
       - key: SUPABASE_URL
@@ -15,14 +15,18 @@ services:
         sync: false
     healthCheckPath: /
 
-  # Website (TypeScript) - Uncomment when ready
-  # - type: web
-  #   name: omni-ai-website
-  #   env: node
-  #   plan: free
-  #   buildCommand: cd website && npm install && npm run build
-  #   startCommand: cd website && npm start
-  #   envVars:
-  #     - key: NODE_ENV
-  #       value: production
-
+  # Next.js Website
+  - type: web
+    name: omni-ai-website
+    env: node
+    plan: free
+    buildCommand: cd website && npm install && npm run build
+    startCommand: cd website && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: N8N_WEBHOOK_JWT_TOKEN
+        sync: false
+      - key: PORT
+        value: "3000"
+    healthCheckPath: /
